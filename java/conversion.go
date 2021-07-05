@@ -29,7 +29,7 @@ func init() {
 	})
 }
 
-// convert converts a states.JavaState to a states.BedrockState.
-func convert(state states.JavaState) states.BedrockState {
+// Convert converts a states.JavaState to a states.BedrockState.
+func Convert(state states.JavaState) states.BedrockState {
 	return conversionTable[state.Encode()]
 }

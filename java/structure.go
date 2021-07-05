@@ -41,9 +41,17 @@ func (structure Structure) Convert() bedrock.Structure {
 
 	bedrockStructure := bedrock.NewStructure([3]int{int(size[0]), int(size[1]), int(size[2])})
 	for _, b := range structure.Blocks {
-		converted := convert(structure.Palette[b.State])
+		converted := Convert(structure.Palette[b.State])
 		if converted.Name == "minecraft:structure_block" {
 			continue
+		}
+
+		// Fix the values.
+		for k, v := range converted.Properties {
+			switch v := v.(type) {
+			case float64:
+				converted.Properties[k] = int32(v)
+			}
 		}
 
 		bedrockStructure.Set(int(b.Pos[0]), int(b.Pos[1]), int(b.Pos[2]), converted)

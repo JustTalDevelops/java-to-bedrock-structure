@@ -2,6 +2,7 @@ package states
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -31,11 +32,18 @@ func (state JavaState) Encode() string {
 		sb.WriteString("[")
 	}
 
+	keys := make([]string, 0, len(state.Properties))
+	for k := range state.Properties {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+
 	var index int
-	for k, v := range state.Properties {
+	for _, k := range keys {
+		v := state.Properties[k]
 		sb.WriteString(fmt.Sprintf("%v=%v", k, v))
 
-		if index < len(state.Properties) - 1 {
+		if index < len(state.Properties)-1 {
 			sb.WriteString(",")
 		}
 		index++
