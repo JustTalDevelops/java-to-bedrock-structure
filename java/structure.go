@@ -54,6 +54,14 @@ func (structure Structure) Convert() bedrock.Structure {
 			}
 		}
 
+		if _, ok := converted.Properties["persistent_bit"]; ok {
+			converted.Properties["persistent_bit"] = true
+		}
+
+		if _, ok := converted.Properties["update_bit"]; ok {
+			converted.Properties["update_bit"] = false
+		}
+
 		bedrockStructure.Set(int(b.Pos[0]), int(b.Pos[1]), int(b.Pos[2]), converted)
 	}
 
