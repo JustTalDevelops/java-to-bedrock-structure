@@ -36,12 +36,12 @@ type Structure struct {
 }
 
 // convert converts a Java edition structure to a Bedrock edition structure.
-func (javaStructure Structure) Convert() bedrock.Structure {
-	size := javaStructure.Size
+func (structure Structure) Convert() bedrock.Structure {
+	size := structure.Size
 
 	bedrockStructure := bedrock.NewStructure([3]int{int(size[0]), int(size[1]), int(size[2])})
-	for _, b := range javaStructure.Blocks {
-		converted := convert(javaStructure.Palette[b.State])
+	for _, b := range structure.Blocks {
+		converted := convert(structure.Palette[b.State])
 		if converted.Name == "minecraft:structure_block" {
 			continue
 		}
